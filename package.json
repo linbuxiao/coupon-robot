@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "get": "node index.js"
+    "get": "node index.js",
+    "encode": "node hash.js"
   },
   "dependencies": {
     "art-template": "^4.13.2",
