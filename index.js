@@ -4,6 +4,8 @@ import dotenv from 'dotenv'
 import consola from 'consola'
 import { secrets } from './constant.js' 
 import StringCrypto from 'string-crypto';
+import art from 'art-template'
+import path from 'path'
 
 const { decryptString } = new StringCrypto()
 
@@ -13,8 +15,11 @@ const { MT_PASSWORD, TELEGRAM_TOKEN } = process.env
 
 const decodeSecrets = JSON.parse(decryptString(secrets, MT_PASSWORD))
 
+const url = 'https://mediacps.meituan.com/gundam/gundamGrabV3'
+const gundam = 20625
+
 async function fetchData(env) {
-  const { url, cookie, gundam } = env
+  const { cookie } = env
   const res = await got({
     method: 'POST',
     url,
