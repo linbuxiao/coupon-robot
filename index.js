@@ -7,6 +7,8 @@ dotenv.config()
 
 const { MT_URL, MT_COOKIE, MT_GUNDAM, TELEGRAM_TOKEN } = process.env
 
+consola.info(MT_URL, MT_COOKIE, MT_GUNDAM, TELEGRAM_TOKEN)
+
 const meituanUrl = MT_URL
 
 const res = await got({
