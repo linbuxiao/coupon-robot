@@ -42,7 +42,7 @@ async function fetchData(env) {
   
   consola.success('Send to channel successfully。')
   
-  bot.api.sendMessage('@xiaoxiaopai', JSON.stringify(coupons, null, 4))
+  bot.api.sendMessage('@xiaoxiaopai', coupons)
 }
 
 await Promise.all(decodeSecrets.map(env => fetchData(env))) 
