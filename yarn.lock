@@ -254,6 +254,11 @@ responselike@^2.0.0:
   dependencies:
     lowercase-keys "^2.0.0"
 
+string-crypto@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.nlark.com/string-crypto/download/string-crypto-2.0.2.tgz#edd3ce05335705aa927ee94d8c8221600478badd"
+  integrity sha1-7dPOBTNXBaqSfulNjIIhYAR4ut0=
+
 tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.npmmirror.com/tr46/download/tr46-0.0.3.tgz?cache=0&sync_timestamp=1633302360065&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Ftr46%2Fdownload%2Ftr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"

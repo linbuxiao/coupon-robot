@@ -30,7 +30,7 @@ jobs:
         run: |
           touch .env
           echo MT_URL=${{ secrets.MT_URL }} >> .env
-          echo MT_COOKIE=${{ secrets.MT_COOKIE }} >> .env
+          echo MT_PASSWORD=${{ secrets.MT_PASSWORD }} >> .env
           echo MT_GUNDAM=${{ secrets.MT_GUNDAM }} >> .env
           echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
       - name: Use Node.js ${{ matrix.node-version }}
