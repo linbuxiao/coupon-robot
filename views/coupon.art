@@ -1,0 +1,4 @@
+*红包领取*
+{{each msg}}
+{{$value.name}}: {{$value.price}}, {{$value.limit}}
+{{/each}}
