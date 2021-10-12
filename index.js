@@ -23,7 +23,7 @@ const res = await got({
 
 const result = JSON.parse(res.body)
 
-if(result.msg !== '成功') throw new Error('Failed to receive coupon.')
+if(result.msg !== '成功') consola.error(result)
 
 const coupons = result.data.coupons.map(item => ({
   name: item.couponName,
