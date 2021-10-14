@@ -31,3 +31,4 @@ yarn leetcode
 - `TELEGRAM_TOKEN` : Telegram Token，发送信息至频道。
 - `LC_USERNAME` : Leecode username， 获取用户题解。
 - `GIST_TOKEN`: Github Token，储存题解数据。
+- `GIST_ID`: gist id，数据源。
