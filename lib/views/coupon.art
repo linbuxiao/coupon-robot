@@ -1,4 +1,0 @@
-#红包领取
-{{each coupons}}
-{{$value.price}}
-{{/each}}
