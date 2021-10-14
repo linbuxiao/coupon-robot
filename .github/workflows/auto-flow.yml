@@ -1,0 +1,99 @@
+name: auto flow
+
+on: 
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  repository_dispatch:
+    types: coupon
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  coupon:
+    name: coupon
+    runs-on: ubuntu-latest
+    environment: 
+      name: get
+    strategy:
+      matrix:
+        node-version:
+          - 14.x
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: create .env file
+        run: |
+          touch .env
+          echo MT_PASSWORD=${{ secrets.MT_PASSWORD }} >> .env
+          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install deps
+        run: yarn
+      - name: start job
+        run: yarn coupon
+  leetcode:
+    name: leetcode
+    runs-on: ubuntu-latest
+    environment: 
+      name: get
+    strategy:
+      matrix:
+        node-version:
+          - 14.x
+
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: create .env file
+        run: |
+          touch .env
+          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env 
+          echo LC_USERNAME=${{ secrets.LC_USERNAME }} >> .env
+          echo GIST_TOKEN=${{ secrets.GIST_TOKEN }} >> .env 
+          echo GIST_ID=${{ secrets.GIST_ID }} >> .env
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install deps
+        run: yarn
+      - name: start job
+        run: yarn leetcode
+  weibo:
+    name: weibo
+    runs-on: ubuntu-latest
+    environment: 
+      name: get
+    strategy:
+      matrix:
+        node-version:
+          - 14.x
+
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: create .env file
+        run: |
+          touch .env
+          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env 
+          echo WB_RSS=${{ secrets.WB_RSS }} >> .env
+          echo GIST_TOKEN=${{ secrets.GIST_TOKEN }} >> .env 
+          echo GIST_ID=${{ secrets.GIST_ID }} >> .env
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install deps
+        run: yarn
+      - name: start job
+        run: yarn weibo
+  
+
