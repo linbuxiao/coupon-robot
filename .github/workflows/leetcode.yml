@@ -1,0 +1,38 @@
+name: Get Leetcode notes and Send to Telegram
+
+on: 
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  repository_dispatch:
+    types: leetcode
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  get:
+    name: get
+    runs-on: ubuntu-latest
+    environment: 
+      name: get
+    strategy:
+      matrix:
+        node-version:
+          - 14.x
+
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: start job
+        run: yarn && yarn leetcode

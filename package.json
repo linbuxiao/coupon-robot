@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "get": "node index.js",
+    "coupon": "node coupon.js",
+    "leetcode": "node leetcode.js",
     "encode": "node hash.js"
   },
   "dependencies": {

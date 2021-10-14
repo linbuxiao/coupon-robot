@@ -6,7 +6,7 @@ on:
       - master
   workflow_dispatch:
   repository_dispatch:
-    types: getCoupon
+    types: coupon
   schedule:
     - cron:  '0 0 * * *'
 
@@ -36,4 +36,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: start job
-        run: yarn && yarn get
+        run: yarn && yarn coupon
