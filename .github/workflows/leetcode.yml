@@ -24,15 +24,20 @@ jobs:
 
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v2
-      - name: Create .env file
+      - name: create .env file
         run: |
           touch .env
-          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
+          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env 
+          echo LC_USERNAME=${{ secrets.LC_USERNAME }} >> .env
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: install deps
+        run: yarn
+      - name: run test
+        run: yarn test
       - name: start job
-        run: yarn && yarn leetcode
+        run: yarn coupon

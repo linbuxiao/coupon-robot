@@ -5,9 +5,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "coupon": "node coupon.js",
-    "leetcode": "node leetcode.js",
-    "encode": "node hash.js"
+    "coupon": "node -r dotenv/config lib/coupon/index.js",
+    "leetcode": "node -r dotenv/config lib/leetcode/index.js",
+    "test": "xv test"
   },
   "dependencies": {
     "art-template": "^4.13.2",
@@ -19,6 +19,7 @@
     "string-crypto": "^2.0.2"
   },
   "devDependencies": {
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "xv": "^1.0.2"
   }
 }
