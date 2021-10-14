@@ -31,6 +31,7 @@ jobs:
           touch .env
           echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env 
           echo LC_USERNAME=${{ secrets.LC_USERNAME }} >> .env
+          echo GIST_TOKEN=${{ secrets.GIST_TOKEN }} >> .env
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:

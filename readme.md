@@ -30,3 +30,4 @@ yarn leetcode
 - `MT_PASSWORD` : 密钥。由于Cookie过长无法保存至环境变量中，所以密文保存到仓库，使用密钥解码。
 - `TELEGRAM_TOKEN` : Telegram Token，发送信息至频道。
 - `LC_USERNAME` : Leecode username， 获取用户题解。
+- `GIST_TOKEN`: Github Token，储存题解数据。
