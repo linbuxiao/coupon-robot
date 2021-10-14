@@ -40,4 +40,4 @@ jobs:
       - name: run test
         run: yarn test
       - name: start job
-        run: yarn coupon
+        run: yarn leetcode
