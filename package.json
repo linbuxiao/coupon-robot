@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "art-template": "^4.13.2",
+    "cheerio": "^1.0.0-rc.10",
     "consola": "^2.15.3",
     "dayjs": "^1.10.7",
     "gists": "^2.0.0",
