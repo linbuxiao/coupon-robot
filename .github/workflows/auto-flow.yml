@@ -11,32 +11,6 @@ on:
     - cron:  '0 0 * * *'
 
 jobs:
-  coupon:
-    name: coupon
-    runs-on: ubuntu-latest
-    environment: 
-      name: get
-    strategy:
-      matrix:
-        node-version:
-          - 14.x
-
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v2
-      - name: create .env file
-        run: |
-          touch .env
-          echo MT_PASSWORD=${{ secrets.MT_PASSWORD }} >> .env
-          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: install deps
-        run: yarn
-      - name: start job
-        run: yarn coupon
   leetcode:
     name: leetcode
     runs-on: ubuntu-latest

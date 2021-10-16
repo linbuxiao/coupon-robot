@@ -468,6 +468,13 @@ keyv@^4.0.0:
   dependencies:
     json-buffer "3.0.1"
 
+leeter@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/leeter/-/leeter-1.0.4.tgz#ba8278e5dc07350f0d5b143ff85d7f52187455db"
+  integrity sha512-pZC3+4qMRS38rkg4MKyINQ3fN7Z1KPfrmcTwKy+xHtlMa/p2aox4L1grThxF1qGGL3hhDXZdppjkNx3FeWQlEQ==
+  dependencies:
+    got "^11.8.2"
+
 levn@~0.3.0:
   version "0.3.0"
   resolved "https://registry.nlark.com/levn/download/levn-0.3.0.tgz#3b09924edf9f083c0490fdd4c0bc4421e04764ee"
