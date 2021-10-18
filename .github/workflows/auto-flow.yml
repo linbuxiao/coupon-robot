@@ -6,7 +6,7 @@ on:
       - master
   workflow_dispatch:
   repository_dispatch:
-    types: coupon
+    types: auto-flow
   schedule:
     - cron:  '0 0 * * *'
 
@@ -16,13 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: get
-    strategy:
-      matrix:
-        node-version:
-          - 14.x
     steps:
-      - name: checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: create .env file
         run: |
           touch .env
@@ -30,10 +25,9 @@ jobs:
           echo LC_USERNAME=${{ secrets.LC_USERNAME }} >> .env
           echo GIST_TOKEN=${{ secrets.GIST_TOKEN }} >> .env 
           echo GIST_ID=${{ secrets.GIST_ID }} >> .env
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '14'
       - name: Cache pnpm modules
         uses: actions/cache@v2
         with:
@@ -57,13 +51,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: get
-    strategy:
-      matrix:
-        node-version:
-          - 14.x
     steps:
-      - name: checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: create .env file
         run: |
           touch .env
@@ -71,10 +60,9 @@ jobs:
           echo WB_RSS=${{ secrets.WB_RSS }} >> .env
           echo GIST_TOKEN=${{ secrets.GIST_TOKEN }} >> .env 
           echo GIST_ID=${{ secrets.GIST_ID }} >> .env
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '14'
       - name: Cache pnpm modules
         uses: actions/cache@v2
         with:
