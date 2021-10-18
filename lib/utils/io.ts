@@ -2,7 +2,10 @@ import Gists from 'gists'
 import consola from 'consola'
 
 class DB {
-  constructor({token, gistId, gistFile}) {
+  gists: Gists
+  id: string
+  fileName: string
+  constructor({token, gistId, gistFile}: Record<'token'|'gistId'|'gistFile', string>) {
     consola.info('init gists db')
     this.gists = new Gists({ token })
     this.id = gistId
@@ -15,10 +18,13 @@ class DB {
     return JSON.parse(res.body.files[this.fileName].content)
   }
 
-  async write(data) {
-    let update = { files: {} }
-    update.files[this.fileName] = {
-        content: JSON.stringify(data, null, 2)
+  async write(data: any) {
+    const update = { files: 
+      { 
+        [this.fileName]: {
+          content: JSON.stringify(data, null, 2)
+        } 
+      } 
     }
     consola.info('updated: ', update)
     return this.gists.edit(this.id, update)

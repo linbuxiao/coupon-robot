@@ -1,15 +1,16 @@
 import { Bot } from 'grammy'
 import consola from 'consola'
 
-let bot
+let bot: Bot | null = null
 
 try {
-  bot = new Bot(process.env.TELEGRAM_TOKEN)
+  bot = new Bot(process.env.TELEGRAM_TOKEN!)
 } catch(e) {
   throw new Error('Please check if telegram environment variables are configured.')
 }
 
-export async function sendMsgToChannel(msg) {
+export async function sendMsgToChannel(msg: string) {
+  if(!bot) throw 'Your bot is not init.'
   try {
     await bot.api.sendMessage('@xiaoxiaopai', msg, {
       parse_mode: 'Markdown'

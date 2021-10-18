@@ -20,8 +20,6 @@ jobs:
       matrix:
         node-version:
           - 14.x
-
-
     steps:
       - name: checkout code
         uses: actions/checkout@v2
@@ -38,8 +36,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install deps
         run: yarn
+      - name: build
+        run: yarn build
       - name: start job
         run: yarn leetcode
+
+
+
   weibo:
     name: weibo
     runs-on: ubuntu-latest
@@ -49,8 +52,6 @@ jobs:
       matrix:
         node-version:
           - 14.x
-
-
     steps:
       - name: checkout code
         uses: actions/checkout@v2
@@ -67,6 +68,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install deps
         run: yarn
+      - name: build
+        run: yarn build
       - name: start job
         run: yarn weibo
   

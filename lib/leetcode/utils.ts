@@ -2,12 +2,12 @@ import DB from '../utils/io.js'
 import consola from 'consola'
 import art from '../utils/art.js'
 import { sendMsgToChannel } from '../utils/bot.js'
-import Letter from 'leeter'
+import { leetMaker } from 'leeter'
 
-const leet = new Letter()
+const leet = leetMaker()
 
 const db = new DB({
-  token: process.env.GIST_TOKEN,
+  token: process.env.GIST_TOKEN!,
   gistId: '54a4e79000cb255d942741d1be90f567',
   gistFile: 'data.json'
 })
@@ -15,11 +15,15 @@ const db = new DB({
 const data = await db.read()
 
 export async function fetchData() {
-  const res = await leet.solutionArticles(process.env.LC_USERNAME)
+  const res = await leet.solutionArticles(process.env.LC_USERNAME!)
   let list
   try {
     consola.info(`Leetcode username: ${process.env.LC_USERNAME}.`)
-    list = res.edges.map(item => {
+    list = res.edges.map((item: {
+      node : Record<'title'|'uuid'|'summary'|'createdAt'|'slug', string> & {
+        question: { questionTitleSlug: string }
+      }
+    }) => {
       return {
         title: item.node.title,
         uuid: item.node.uuid,
@@ -31,12 +35,12 @@ export async function fetchData() {
   } catch(e) {
     consola.error(`
     Error: ${e} \n
-    respone: ${res.body}
+    respone: ${res}
     `)
   }
   
-  list.map(async (item) => {
-    if(!data.find(e => e.uuid === item.uuid)) {
+  list&&list.map(async (item: Record<'title'|'uuid'|'summary'|'date'|'link', string>) => {
+    if(!data.find((e: any) => e.uuid === item.uuid)) {
       await sendMsgToChannel(art('leetcode.art', {
         ...item
       }))
