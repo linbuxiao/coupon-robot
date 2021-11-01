@@ -1,9 +1,12 @@
-import { Bot } from 'grammy'
+import { Bot } from "https://deno.land/x/grammy/mod.ts";
+import { config as env } from "https://deno.land/x/dotenv/mod.ts";
+
+const ENV = env()
 
 let bot: Bot | null = null
 
 try {
-  bot = new Bot(process.env['TELEGRAM_TOKEN']!)
+  bot = new Bot(ENV['TELEGRAM_TOKEN']!)
 } catch(e) {
   throw new Error('Please check if telegram environment variables are configured.')
 }

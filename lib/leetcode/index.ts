@@ -1,22 +1,24 @@
-import 'dotenv/config'
-import DB from '../utils/io.js'
-import { leetMaker } from 'leeter'
-import { sendMsgToChannel } from '../utils/bot.js'
-import art from '../utils/art.js'
+import { config as env } from "https://deno.land/x/dotenv/mod.ts";
+import DB from '../utils/io.ts'
+import { leetMaker } from 'https://raw.githubusercontent.com/linbuxiao/leeter/master/lib/index.ts'
+import { sendMsgToChannel } from '../utils/bot.ts'
+import * as dejs from "https://deno.land/x/dejs@0.10.2/mod.ts";
 
 const leeter = leetMaker()
 
+const ENV = env()
+
 const db = new DB({
-  token: process.env['GIST_TOKEN']!,
+  token:  ENV['GIST_TOKEN']!,
   gistId: '54a4e79000cb255d942741d1be90f567',
   gistFile: 'data.json'  
 })
 
-db.read().then(async data => {
-  const res = await leeter.solutionArticles(process.env['LC_USERNAME']!)
+db.read().then(async (data: any) => {
+  const res = await leeter.solutionArticles(ENV['LC_USERNAME']!)
   let list
   try {
-    console.log(`Leetcode username: ${process.env['LC_USERNAME']}.`)
+    console.log(`Leetcode username: ${ENV['LC_USERNAME']}.`)
     list = res.edges.map((item: {
       node : Record<'title'|'uuid'|'summary'|'createdAt'|'slug', string> & {
         question: { questionTitleSlug: string }
@@ -36,12 +38,13 @@ db.read().then(async data => {
     respone: ${res}
     `)
   }
-  
+  const view = Deno.readFileSync(`${Deno.cwd()}\\lib\\views\\leetcode.ejs`)
   list&&list.map(async (item: Record<'title'|'uuid'|'summary'|'date'|'link', string>) => {
     if(!data.find((e: any) => e.uuid === item.uuid)) {
-      await sendMsgToChannel(art('leetcode.art', {
+      const markdown = await dejs.renderFileToString(view.toString(), {
         ...item
-      }))
+      })
+      await sendMsgToChannel(markdown)
     }
   })
 

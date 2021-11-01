@@ -1,12 +1,12 @@
-import Gists from 'gists'
+import Gist from 'https://raw.githubusercontent.com/linbuxiao/low_gist/main/mod.ts'
 
 class DB {
-  gists: Gists
+  gists: Gist
   id: string
   fileName: string
   constructor({token, gistId, gistFile}: Record<'token'|'gistId'|'gistFile', string>) {
     console.log('init gists db')
-    this.gists = new Gists({ token })
+    this.gists = new Gist(token)
     this.id = gistId
     this.fileName = gistFile
   }
@@ -14,19 +14,17 @@ class DB {
   async read() {
     console.log('fetch data from gist: ', this.id)
     const res = await this.gists.get(this.id)
-    return JSON.parse(res.body.files[this.fileName]!.content)
+    return JSON.parse(res.files[this.fileName]!.content)
   }
 
   async write(data: any) {
-    const update = { files: 
-      { 
-        [this.fileName]: {
-          content: JSON.stringify(data, null, 2)
-        } 
+    const files =  { 
+      [this.fileName]: {
+        content: JSON.stringify(data, null, 2)
       } 
-    }
-    console.log('updated: ', update)
-    return this.gists.edit(this.id, update)
+    } 
+    console.log('updated: ', files)
+    return await this.gists.set(this.id, files[this.fileName])
   }
 }
 
