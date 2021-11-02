@@ -24,7 +24,7 @@ class DB {
       } 
     } 
     console.log('updated: ', files)
-    return await this.gists.set(this.id, files[this.fileName])
+    return await this.gists.set(this.id, files)
   }
 }
 

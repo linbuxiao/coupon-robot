@@ -15,7 +15,11 @@ const db = new DB({
 })
 
 db.read().then(async (data: any) => {
+  console.log(data);
+  
   const res = await leeter.solutionArticles(ENV['LC_USERNAME']!)
+  console.log(ENV['LC_USERNAME']);
+  
   let list
   try {
     console.log(`Leetcode username: ${ENV['LC_USERNAME']}.`)
@@ -38,10 +42,9 @@ db.read().then(async (data: any) => {
     respone: ${res}
     `)
   }
-  const view = Deno.readFileSync(`${Deno.cwd()}\\lib\\views\\leetcode.ejs`)
   list&&list.map(async (item: Record<'title'|'uuid'|'summary'|'date'|'link', string>) => {
     if(!data.find((e: any) => e.uuid === item.uuid)) {
-      const markdown = await dejs.renderFileToString(view.toString(), {
+      const markdown = await dejs.renderFileToString(`${Deno.cwd()}\\lib\\views\\leetcode.ejs`, {
         ...item
       })
       await sendMsgToChannel(markdown)
